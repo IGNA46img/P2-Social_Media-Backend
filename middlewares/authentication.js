@@ -1,6 +1,4 @@
 const jwt = require("jsonwebtoken");
-const { jwt_secret } = require("../config/");
-
 const User = require("../models/User");
 
 module.exports = {
@@ -26,7 +24,7 @@ module.exports = {
           .status(401)
           .send({ message: "Unauthorized - JWT token missing" });
       }
-      const { _id, ts } = jwt.verify(token, jwt_secret);
+      const { _id, ts } = jwt.verify(token, process.env.JWT_SECRET);
       const user = await User.findOne({ _id, tokens: ts });
       if (!user) {
         return res

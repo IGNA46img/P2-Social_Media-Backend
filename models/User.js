@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema(
     },
     last_name: {
       type: String,
+      required: [true, "Last name cannot be empty"],
     },
     email: {
       type: String,
@@ -16,6 +17,7 @@ const UserSchema = new mongoose.Schema(
     },
     password: {
       type: String,
+      required: [true, "Password validation failed"],
     },
     role: {
       type: String,
@@ -27,5 +29,12 @@ const UserSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+UserSchema.set("toJSON", {
+  transform(doc, ret) {
+    delete ret.password;
+    return ret;
+  },
+});
 
 module.exports = mongoose.model("User", UserSchema);
