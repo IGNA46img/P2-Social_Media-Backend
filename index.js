@@ -15,3 +15,5 @@ routes.forEach((route) => app.use("/" + route, require("./routes/" + route)));
 app.use(require("./middleware/validation"));
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+module.exports = app;
