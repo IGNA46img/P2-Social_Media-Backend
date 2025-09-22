@@ -20,6 +20,12 @@ const PostSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
+    comments: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Comment",
+      },
+    ],
   },
   {
     timestamps: true,
@@ -27,7 +33,7 @@ const PostSchema = new mongoose.Schema(
 );
 
 PostSchema.index({
-  title: "title",
+  title: "text",
 });
 
 module.exports = mongoose.model("Post", PostSchema);
